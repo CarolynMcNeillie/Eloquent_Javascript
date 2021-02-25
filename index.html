@@ -74,10 +74,8 @@
     // CHAPTER 3
 
     function min(a, b) {
-      if (a < b) {
-        return a
-      } else if ( a > b) {
-        return b
+      if (a !== b) {
+        return a < b ? a : b
       } else {
         return null
       }
