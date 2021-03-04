@@ -32,19 +32,6 @@
       }
     }
 
-    function makeRow(size, str1, str2) {
-        let row = ""
-        for (let i = 0; i < size; i++) {
-          if (i % 2 === 0) {
-            row += str1
-          } else {
-            row += str2
-          }
-        }
-        row += "\n"
-        return row
-      }
-
     function checkerboard(size) {
       let board = ""
       for (let i = 1; i <= size; i++) {
@@ -115,6 +102,22 @@
       }
 
       return count
+    }
+
+    // CHAPTER 4
+    function range(start, end, step = start < end ? 1 : -1) {
+      const array = []
+      if (step > 0) {
+        for (let i = start; i <= end; i += step) array.push(i);
+      } else {
+        for (let i = start; i >= end; i += step) array.push(i);
+      }
+      return array
+    }
+
+    function sum(array) {
+      const sum = array.reduce((item, curr) => item + curr)
+      return sum
     }
   </script>
   
