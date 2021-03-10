@@ -147,8 +147,6 @@
       return list
     }
 
-    const sampleList = arrayToList([1, 2, 3, 4, 5, 6, 7, 8, 9])
-
     function listToArray(list) {
       const array = []
       for (let node = list; node; node = node.rest) {
@@ -157,18 +155,45 @@
       return array
     } 
 
-    function prependList(element, list) {
+    function prepend(element, list) {
       return {
         value: element,
         rest: list
       }
     }
 
-    function nth(list, number, counter = 0) {
+    function nth(list, number) {
       if (counter < number) {
         return list.rest ? nth(list.rest, number, counter + 1) : null
       } 
       return list.value
+    }
+
+    let obj = {here: {is: "an"}, object: 2};
+    let obj2 = {here: 1, object: 2}
+
+    function deepEqual(val1, val2) {
+      let exceptions = 0;
+      if (typeof(val1) !== typeof(val2)) {
+        exceptions++
+      } else if (typeof(val1) === "object") {
+        if (Array.isArray(val1) === Array.isArray(val2)) {
+          if (Array.isArray(val2)) {
+            val1.forEach((val, i) => {if (!deepEqual(val, val2[i])) exceptions++})
+          } else {
+            keys1 = Object.keys(val1)
+            let equal = 0
+            keys1.forEach((key) => {
+              if (val2[key]) {
+                if (!deepEqual(val1[key], val2[key])) exceptions++
+              } else exceptions++
+            })
+          }
+        }
+      } else if (val1 !== val2) {
+        return exceptions++
+      }
+      return exceptions === 0
     }
 
   </script> 
