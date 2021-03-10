@@ -160,6 +160,20 @@
           list = list.rest
         }
       }
+    } 
+
+    function prependList(element, list) {
+      return {
+        value: element,
+        rest: list
+      }
+    }
+
+    function nth(list, number, counter = 0) {
+      if (counter < number) {
+        return list.rest ? nth(list.rest, number, counter + 1) : null
+      } 
+      return list.value
     }
 
   </script> 
