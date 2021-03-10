@@ -169,10 +169,7 @@
       return list.value
     }
 
-    let obj = {here: {is: "an"}, object: 2};
-    let obj2 = {here: 1, object: 2}
-
-    function deepEqual(val1, val2) {
+    function myDeepEqual(val1, val2) {
       let exceptions = 0;
       if (typeof(val1) !== typeof(val2)) {
         exceptions++
@@ -194,6 +191,24 @@
         return exceptions++
       }
       return exceptions === 0
+    }
+
+    // Book's solution
+    function deepEqual(a, b) {
+      if (a === b) return true;
+      
+      if (a == null || typeof a != "object" ||
+          b == null || typeof b != "object") return false;
+
+      let keysA = Object.keys(a), keysB = Object.keys(b);
+
+      if (keysA.length != keysB.length) return false;
+
+      for (let key of keysA) {
+        if (!keysB.includes(key) || !deepEqual(a[key], b[key])) return false;
+      }
+
+      return true;
     }
 
   </script> 
