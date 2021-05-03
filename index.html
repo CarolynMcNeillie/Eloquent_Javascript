@@ -59,7 +59,6 @@
     }
 
     // CHAPTER 3
-
     function min(a, b) {
       if (a !== b) {
         return a < b ? a : b
@@ -210,6 +209,23 @@
 
       return true;
     }
+
+    // CHAPTER 5
+    function greaterThan(n) {
+      return m => m > n;
+    }
+
+    function noisy(f) {
+      return (...args) => {
+        console.log("Calling with ", args);
+        let result = f(...args);
+        console.log("called with", args, ", returned", result)
+        return result
+      }
+    }
+
+    // Whoa! You can create and call a function at the same time like this!
+    // console.log(greaterThan(10)(11))
 
   </script> 
   
