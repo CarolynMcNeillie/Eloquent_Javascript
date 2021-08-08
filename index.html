@@ -1,233 +1,341 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // CHAPTER 2
 
-  <script>
-    // CHAPTER 2
+      function triangle() {
+        let string = "#";
 
-    function triangle() {
-      let string = "#"
-
-      do {
-        console.log(string)
-        string += "#"
-      } while (string.length < 8)
-    }
-
-    function fizzBuzz() {
-      for (let i = 1; i <= 100; i++) {
-        if (i % 3 === 0) {
-          i % 5 === 0 && console.log("fizzbuzz") || console.log("fizz") 
-        } else if (i % 5 === 0) {
-          console.log("buzz") 
-        } else {
-          console.log(i)
-        }
-      }
-    }
-
-    function checkerboard(size) {
-      let board = ""
-      for (let i = 1; i <= size; i++) {
-        if (i % 2 === 0) {
-          for (let x = 0; x < size; x++) {
-            if (x % 2 === 0) {
-              board += " "
-            } else {
-              board += "#"
-            }
-          }
-          board += "\n"
-        } else {
-          for (let x = 0; x < size; x++) {
-            if (x % 2 === 0) {
-              board += "#"
-            } else {
-              board += " "
-            }
-          }
-          board += "\n"
-        }
-      }
-      console.log(board)
-    }
-
-    // CHAPTER 3
-    function min(a, b) {
-      if (a !== b) {
-        return a < b ? a : b
-      } else {
-        return null
-      }
-    }
-
-    function isEven(n) {
-      // if the number is negative, test it's positive
-      if (n < 0) {
-        return(isEven(-n))
-      } else if (n === 0) {
-        return true
-      } else if (n === 1) {
-        return false
-      // if n is greater than 1, subtract two and test again
-      } else {
-        return isEven(n-2)
-      }
-    }
-
-    function countBs(string) {
-      let count = 0
-      for (let i = 0; i < string.length; i++) {
-        if (string[i] === "B") {
-          count ++
-        }
+        do {
+          console.log(string);
+          string += "#";
+        } while (string.length < 8);
       }
 
-      return count
-    }
-
-    function countChar(string, char) {
-      let count = 0
-      for (let i = 0; i < string.length; i++) {
-        if (string[i] === char) {
-          count ++
-        }
-      }
-
-      return count
-    }
-
-    // CHAPTER 4
-    function range(start, end, step = start < end ? 1 : -1) {
-      const array = []
-      if (step > 0) {
-        for (let i = start; i <= end; i += step) array.push(i);
-      } else {
-        for (let i = start; i >= end; i += step) array.push(i);
-      }
-      return array
-    }
-
-    function sum(array) {
-      const sum = array.reduce((item, curr) => item + curr)
-      return sum
-    }
-
-    function reverseArray(array) {
-      const newArray = []
-      for (let i = array.length - 1; i > -1; i--) newArray.push(array[i]);
-      return newArray
-    }
-
-    function reverseArrayInPlace(array) {
-      const halfway = (Math.floor(array.length/2))
-      for (let i = 0; i < halfway; i++) {
-        const front = array[i]
-        const back = array[array.length - i -1]
-        array[i] = back
-        array[array.length - i -1] = front
-      }
-    }
-
-    function arrayToList(array) {
-      let list = null
-      for (let i = array.length -1; i >= 0; i--) {
-        list = {
-          value: array[i],
-          rest: list
-        }
-      }
-      return list
-    }
-
-    function listToArray(list) {
-      const array = []
-      for (let node = list; node; node = node.rest) {
-        array.push(node.value)
-      }
-      return array
-    } 
-
-    function prepend(element, list) {
-      return {
-        value: element,
-        rest: list
-      }
-    }
-
-    function nth(list, number) {
-      if (counter < number) {
-        return list.rest ? nth(list.rest, number, counter + 1) : null
-      } 
-      return list.value
-    }
-
-    function myDeepEqual(val1, val2) {
-      let exceptions = 0;
-      if (typeof(val1) !== typeof(val2)) {
-        exceptions++
-      } else if (typeof(val1) === "object") {
-        if (Array.isArray(val1) === Array.isArray(val2)) {
-          if (Array.isArray(val2)) {
-            val1.forEach((val, i) => {if (!deepEqual(val, val2[i])) exceptions++})
+      function fizzBuzz() {
+        for (let i = 1; i <= 100; i++) {
+          if (i % 3 === 0) {
+            (i % 5 === 0 && console.log("fizzbuzz")) || console.log("fizz");
+          } else if (i % 5 === 0) {
+            console.log("buzz");
           } else {
-            keys1 = Object.keys(val1)
-            let equal = 0
-            keys1.forEach((key) => {
-              if (val2[key]) {
-                if (!deepEqual(val1[key], val2[key])) exceptions++
-              } else exceptions++
-            })
+            console.log(i);
           }
         }
-      } else if (val1 !== val2) {
-        return exceptions++
-      }
-      return exceptions === 0
-    }
-
-    // Book's solution
-    function deepEqual(a, b) {
-      if (a === b) return true;
-      
-      if (a == null || typeof a != "object" ||
-          b == null || typeof b != "object") return false;
-
-      let keysA = Object.keys(a), keysB = Object.keys(b);
-
-      if (keysA.length != keysB.length) return false;
-
-      for (let key of keysA) {
-        if (!keysB.includes(key) || !deepEqual(a[key], b[key])) return false;
       }
 
-      return true;
-    }
-
-    // CHAPTER 5
-    function greaterThan(n) {
-      return m => m > n;
-    }
-
-    function noisy(f) {
-      return (...args) => {
-        console.log("Calling with ", args);
-        let result = f(...args);
-        console.log("called with", args, ", returned", result)
-        return result
+      function checkerboard(size) {
+        let board = "";
+        for (let i = 1; i <= size; i++) {
+          if (i % 2 === 0) {
+            for (let x = 0; x < size; x++) {
+              if (x % 2 === 0) {
+                board += " ";
+              } else {
+                board += "#";
+              }
+            }
+            board += "\n";
+          } else {
+            for (let x = 0; x < size; x++) {
+              if (x % 2 === 0) {
+                board += "#";
+              } else {
+                board += " ";
+              }
+            }
+            board += "\n";
+          }
+        }
+        console.log(board);
       }
-    }
 
-    // Whoa! You can create and call a function at the same time like this!
-    // console.log(greaterThan(10)(11))
+      // CHAPTER 3
+      function min(a, b) {
+        if (a !== b) {
+          return a < b ? a : b;
+        } else {
+          return null;
+        }
+      }
 
-  </script> 
-  
-</body>
+      function isEven(n) {
+        // if the number is negative, test it's positive
+        if (n < 0) {
+          return isEven(-n);
+        } else if (n === 0) {
+          return true;
+        } else if (n === 1) {
+          return false;
+          // if n is greater than 1, subtract two and test again
+        } else {
+          return isEven(n - 2);
+        }
+      }
+
+      function countBs(string) {
+        let count = 0;
+        for (let i = 0; i < string.length; i++) {
+          if (string[i] === "B") {
+            count++;
+          }
+        }
+
+        return count;
+      }
+
+      function countChar(string, char) {
+        let count = 0;
+        for (let i = 0; i < string.length; i++) {
+          if (string[i] === char) {
+            count++;
+          }
+        }
+
+        return count;
+      }
+
+      // CHAPTER 4
+      function range(start, end, step = start < end ? 1 : -1) {
+        const array = [];
+        if (step > 0) {
+          for (let i = start; i <= end; i += step) array.push(i);
+        } else {
+          for (let i = start; i >= end; i += step) array.push(i);
+        }
+        return array;
+      }
+
+      function sum(array) {
+        const sum = array.reduce((item, curr) => item + curr);
+        return sum;
+      }
+
+      function reverseArray(array) {
+        const newArray = [];
+        for (let i = array.length - 1; i > -1; i--) newArray.push(array[i]);
+        return newArray;
+      }
+
+      function reverseArrayInPlace(array) {
+        const halfway = Math.floor(array.length / 2);
+        for (let i = 0; i < halfway; i++) {
+          const front = array[i];
+          const back = array[array.length - i - 1];
+          array[i] = back;
+          array[array.length - i - 1] = front;
+        }
+      }
+
+      function arrayToList(array) {
+        let list = null;
+        for (let i = array.length - 1; i >= 0; i--) {
+          list = {
+            value: array[i],
+            rest: list,
+          };
+        }
+        return list;
+      }
+
+      function listToArray(list) {
+        const array = [];
+        for (let node = list; node; node = node.rest) {
+          array.push(node.value);
+        }
+        return array;
+      }
+
+      function prepend(element, list) {
+        return {
+          value: element,
+          rest: list,
+        };
+      }
+
+      function nth(list, number) {
+        if (counter < number) {
+          return list.rest ? nth(list.rest, number, counter + 1) : null;
+        }
+        return list.value;
+      }
+
+      function myDeepEqual(val1, val2) {
+        let exceptions = 0;
+        if (typeof val1 !== typeof val2) {
+          exceptions++;
+        } else if (typeof val1 === "object") {
+          if (Array.isArray(val1) === Array.isArray(val2)) {
+            if (Array.isArray(val2)) {
+              val1.forEach((val, i) => {
+                if (!deepEqual(val, val2[i])) exceptions++;
+              });
+            } else {
+              keys1 = Object.keys(val1);
+              let equal = 0;
+              keys1.forEach((key) => {
+                if (val2[key]) {
+                  if (!deepEqual(val1[key], val2[key])) exceptions++;
+                } else exceptions++;
+              });
+            }
+          }
+        } else if (val1 !== val2) {
+          return exceptions++;
+        }
+        return exceptions === 0;
+      }
+
+      // Book's solution
+      function deepEqual(a, b) {
+        if (a === b) return true;
+
+        if (
+          a == null ||
+          typeof a != "object" ||
+          b == null ||
+          typeof b != "object"
+        )
+          return false;
+
+        let keysA = Object.keys(a),
+          keysB = Object.keys(b);
+
+        if (keysA.length != keysB.length) return false;
+
+        for (let key of keysA) {
+          if (!keysB.includes(key) || !deepEqual(a[key], b[key])) return false;
+        }
+
+        return true;
+      }
+
+      // CHAPTER 5
+      function greaterThan(n) {
+        return (m) => m > n;
+      }
+
+      function noisy(f) {
+        return (...args) => {
+          console.log("Calling with ", args);
+          let result = f(...args);
+          console.log("called with", args, ", returned", result);
+          return result;
+        };
+      }
+
+      // Whoa! You can create and call a function at the same time like this!
+      // console.log(greaterThan(10)(11));
+
+      // Flattening
+      const arrayOfArrays = [
+        [1, 2, 3],
+        [2, 3, 4],
+        [4, 5, 6],
+        [7, 8],
+        [1, 5, 9],
+        [9, 1, 4, 5, 6],
+      ];
+
+      function flatten(array) {
+        flattened = array.reduce((acc, curr) => {
+          curr.forEach((item) => {
+            if ((item, acc.indexOf(item) === -1)) {
+              acc.push(item);
+            }
+          });
+          return acc;
+        }, []);
+        return flattened;
+      }
+
+      // Book solition
+      // OOPS I misread the assignment and did too much. Also, TIL you can use concat on arrays, not just strings.
+
+      const flattened2 = arrayOfArrays.reduce(
+        (flat, current) => flat.concat(current),
+        []
+      );
+
+      // LOOP
+      function loop(start, test, update, body) {
+        let value = start;
+        if (test(value)) {
+          body(value);
+          value = update(value);
+          loop(value, test, update, body);
+        }
+      }
+
+      // Book solution
+      function loop2(start, test, update, body) {
+        for (let value = start; test(value); value = update(value)) {
+          body(value);
+        }
+      }
+
+      // loop(
+      //   3,
+      //   (n) => n > 0,
+      //   (n) => n - 1,
+      //   console.log
+      // );
+
+      // EVERY
+      // loop
+      // function every(array, test) {
+      //   let everything = true;
+      //   array.forEach((item) => {
+      //     if (!test(item)) {
+      //       everything = false;
+      //     }
+      //   });
+      //   return everything;
+      // }
+
+      // book solution
+      // function every(array, predicate) {
+      //   for (let element of array) {
+      //     if (!predicate(element)) return false;
+      //   }
+      //   return true;
+      // }
+
+      // some method
+      function every(array, test) {
+        return !array.some((item) => !test(item));
+      }
+
+      // console.log(every([1, 3, 5], (n) => n < 10));
+      // // → true
+      // console.log(every([2, 4, 16], (n) => n < 10));
+      // // → false
+      // console.log(every([], (n) => n < 10));
+      // // → true
+
+      // This can only be run in the sandbox
+      // function dominantDirection(text) {
+      //   let counted = countBy(text, (char) => {
+      //     let script = characterScript(char.codePointAt(0));
+      //     return script ? script.direction : "none";
+      //   }).filter(({ name }) => name != "none");
+
+      //   if (counted.length == 0) return "ltr";
+
+      //   return counted.reduce((a, b) => (a.count > b.count ? a : b)).name;
+      // }
+
+      // console.log(dominantDirection("Hello!"));
+      // // → ltr
+      // console.log(dominantDirection("Hey, مساء الخير"));
+      // → rtl
+    </script>
+  </body>
 </html>
